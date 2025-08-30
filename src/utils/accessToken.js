@@ -1,0 +1,63 @@
+/*
+ * @Author: y
+ * @Date: 2025-05-12 16:53:18
+ * @LastEditors: y
+ * @LastEditTime: 2025-06-09 15:30:36
+ * @Description: 封装了访问 Token 的逻辑，便于全局管理 Token。
+ */
+import { storage, tokenTableName } from '@/config'
+
+/**
+ * @description 获取accessToken
+ * @returns {string|ActiveX.IXMLDOMNode|Promise<any>|any|IDBRequest<any>|MediaKeyStatus|FormDataEntryValue|Function|Promise<Credential | null>}
+ */
+export function getAccessToken() {
+  if (storage) {
+    if ('localStorage' === storage) {
+      return localStorage.getItem(tokenTableName)
+    } else if ('sessionStorage' === storage) {
+      return sessionStorage.getItem(tokenTableName)
+    } else {
+      return localStorage.getItem(tokenTableName)
+    }
+  } else {
+    return localStorage.getItem(tokenTableName)
+  }
+}
+
+/**
+ * @description 存储accessToken
+ * @param accessToken
+ * @returns {void|*}
+ */
+export function setAccessToken(accessToken) {
+  if (storage) {
+    if ('localStorage' === storage) {
+      return localStorage.setItem(tokenTableName, accessToken)
+    } else if ('sessionStorage' === storage) {
+      return sessionStorage.setItem(tokenTableName, accessToken)
+    } else {
+      return localStorage.setItem(tokenTableName, accessToken)
+    }
+  } else {
+    return localStorage.setItem(tokenTableName, accessToken)
+  }
+}
+
+/**
+ * @description 移除accessToken
+ * @returns {void|Promise<void>}
+ */
+export function removeAccessToken() {
+  if (storage) {
+    if ('localStorage' === storage) {
+      return localStorage.removeItem(tokenTableName)
+    } else if ('sessionStorage' === storage) {
+      return sessionStorage.clear()
+    } else {
+      return localStorage.removeItem(tokenTableName)
+    }
+  } else {
+    return localStorage.removeItem(tokenTableName)
+  }
+}

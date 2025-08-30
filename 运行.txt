@@ -1,0 +1,2 @@
+先安装依赖：npm install  (node切换到16版本)
+运行项目：npm run serve
